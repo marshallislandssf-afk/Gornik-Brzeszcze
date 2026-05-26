@@ -1,0 +1,67 @@
+'use client';
+import Link from 'next/link';
+import { useLang } from '../LanguageContext';
+
+export default function AboutPage() {
+  const { lang, t } = useLang();
+  const tr = t.about;
+  return (
+    <>
+      <div className="page-header">
+        <div className="container">
+          <div className="subtitle">{tr.subtitle}</div>
+          <h1>{tr.title}</h1>
+        </div>
+      </div>
+      <section className="section">
+        <div className="container">
+          <div className="about-grid">
+            <div>
+              <div style={{ color: 'var(--gold)', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: 4, fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '1rem' }}>{tr.mission_label}</div>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '2rem', lineHeight: 1 }}>{tr.mission_title}</h2>
+              <p style={{ color: 'var(--light-grey)', lineHeight: 1.9, marginBottom: '1.5rem' }}>{tr.p1}</p>
+              <p style={{ color: 'var(--light-grey)', lineHeight: 1.9, marginBottom: '1.5rem' }}>{tr.p2}</p>
+              <p style={{ color: 'var(--light-grey)', lineHeight: 1.9 }}>{tr.p3}</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {tr.facts.map(([label, value, desc]) => (
+                <div key={label} style={{ background: 'var(--dark-2)', border: '1px solid var(--dark-3)', padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                  <div style={{ width: 4, alignSelf: 'stretch', background: 'var(--gold)', flexShrink: 0 }} />
+                  <div>
+                    <div style={{ color: 'var(--grey)', fontSize: '0.75rem', fontFamily: 'var(--font-heading)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: '0.25rem' }}>{label}</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.25rem' }}>{value}</div>
+                    <div style={{ color: 'var(--grey)', fontSize: '0.85rem' }}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section" style={{ background: 'var(--dark)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ color: 'var(--gold)', fontFamily: 'var(--font-heading)', fontWeight: 700, letterSpacing: 4, fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '1rem' }}>{tr.values_label}</div>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: 1 }}>{tr.values_title}</h2>
+          </div>
+          <div className="grid-3">
+            {tr.values.map(([icon, title, desc]) => (
+              <div key={title} style={{ padding: '3rem 2rem', background: 'var(--dark-2)', border: '1px solid var(--dark-3)', textAlign: 'center' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{icon}</div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', letterSpacing: 1, marginBottom: '1rem' }}>{title}</h3>
+                <p style={{ color: 'var(--grey)', lineHeight: 1.8, fontSize: '0.95rem' }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem' }}>{tr.history_cta}</h2>
+          <p style={{ color: 'var(--grey)', maxWidth: 500, margin: '0 auto 2rem' }}>{tr.history_sub}</p>
+          <Link href="/history" className="btn btn-primary">{tr.history_btn}</Link>
+        </div>
+      </section>
+    </>
+  );
+}

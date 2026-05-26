@@ -1,0 +1,69 @@
+'use client';
+import { useLang } from '../LanguageContext';
+
+
+const timeline = {
+  pl: [
+    { year: '1922', title: 'Początki', desc: 'Początki zorganizowanej działalności sportowej w Brzeszczach. Pierwsi zawodnicy związani z lokalną kopalnią węgla.' },
+    { year: '1923', title: 'Oficjalne założenie', desc: 'Pierwszy klub piłkarski zostaje zgłoszony do władz piłkarskich. Klub powstaje z inicjatywy pracowników kopalni Brzeszcze.' },
+    { year: '1925', title: 'Pierwsze rozgrywki', desc: 'Drużyna startuje w klasie C i szybko awansuje do wyższej ligi.' },
+    { year: '1930', title: 'Klasa B', desc: 'Przez 5 lat klub gra w klasie B, budując fundamenty pod dalszy rozwój.' },
+    { year: '1957', title: 'Narodziny Górnika', desc: 'Klub zmienia nazwę na Klub Sportowy Górnik. 17 lipca rejestracja w PKPN w Krakowie jako samodzielne stowarzyszenie.' },
+    { year: '1980s', title: 'Złota era', desc: 'Najlepszy okres w historii klubu. Silna pozycja w regionalnych rozgrywkach, liczna kibicowska baza.' },
+    { year: '2023', title: 'Stulecie', desc: 'Klub obchodzi 100-lecie oficjalnego założenia. Uroczyste obchody z udziałem kibiców i byłych zawodników.' },
+    { year: '2025', title: 'Dziś', desc: 'KS Górnik Brzeszcze prowadzi trzy drużyny i aktywną akademię młodzieżową.' },
+  ],
+  en: [
+    { year: '1922', title: 'Origins', desc: 'The beginnings of organised sport in Brzeszcze. The first players were workers at the local coal mine.' },
+    { year: '1923', title: 'Official founding', desc: 'The first football club is registered with the football authorities, founded on the initiative of workers at the Brzeszcze mine.' },
+    { year: '1925', title: 'First competitions', desc: 'The team enters class C and quickly earns promotion to a higher division.' },
+    { year: '1930', title: 'Class B', desc: 'For five years the club competes in class B, building the foundations for future growth.' },
+    { year: '1957', title: 'Birth of Górnik', desc: 'The club is renamed KS Górnik. On 17 July it is registered in Kraków as an independent association.' },
+    { year: '1980s', title: 'Golden era', desc: 'The best period in the club\'s history. Strong position in regional leagues, large supporter base.' },
+    { year: '2023', title: 'Centenary', desc: 'The club celebrates 100 years since its official founding, with celebrations attended by fans and former players.' },
+    { year: '2025', title: 'Today', desc: 'KS Górnik Brzeszcze runs three teams and an active youth academy.' },
+  ],
+};
+
+export default function HistoryPage() {
+  const { lang, t } = useLang();
+  const tr = t.history;
+  const tl = timeline[lang];
+  return (
+    <>
+      <div className="page-header">
+        <div className="container">
+          <div className="subtitle">{tr.subtitle}</div>
+          <h1>{tr.title}</h1>
+        </div>
+      </div>
+      <section className="section">
+        <div className="container">
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <p style={{ color: 'var(--light-grey)', fontSize: '1.1rem', lineHeight: 1.9, marginBottom: '5rem', textAlign: 'center' }}>{tr.intro}</p>
+            <div style={{ position: 'relative' }}>
+              <div style={{ position: 'absolute', left: '80px', top: 0, bottom: 0, width: 2, background: 'linear-gradient(to bottom, var(--gold), var(--dark-3))' }} />
+              {tl.map((item, i) => (
+                <div key={item.year} style={{ display: 'grid', gridTemplateColumns: '80px 1fr', marginBottom: '3rem', position: 'relative' }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', color: 'var(--gold)', paddingRight: '1rem', textAlign: 'right', paddingTop: '0.2rem' }}>{item.year}</div>
+                  <div style={{ position: 'absolute', left: '72px', top: '0.4rem', width: 16, height: 16, background: i === 0 ? 'var(--gold)' : 'var(--dark-3)', border: '2px solid var(--gold)', borderRadius: '50%', zIndex: 1 }} />
+                  <div style={{ paddingLeft: '2.5rem' }}>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem' }}>{item.title}</h3>
+                    <p style={{ color: 'var(--grey)', lineHeight: 1.8, fontSize: '0.95rem' }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style={{ background: 'var(--dark)', padding: '6rem 0' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '4rem', color: 'var(--gold)', lineHeight: 1, marginBottom: '1.5rem' }}>"</div>
+          <blockquote style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: 1, maxWidth: 700, margin: '0 auto 2rem', lineHeight: 1.3 }}>{tr.quote}</blockquote>
+          <p style={{ color: 'var(--grey)', fontFamily: 'var(--font-heading)', letterSpacing: 2, fontSize: '0.85rem', textTransform: 'uppercase' }}>{tr.quote_attr}</p>
+        </div>
+      </section>
+    </>
+  );
+}
